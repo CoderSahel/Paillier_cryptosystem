@@ -78,12 +78,12 @@ public class Paillier
         BigInteger cipher2 = en.encryption(m2);
 
         //encrypted text
-        System.out.println(cipher1);
-        System.out.println(cipher2);
+        System.out.println("\ncipher text for meassage 1: "+cipher1);
+        System.out.println("\ncipher text for meassage 2: "+cipher2);
 
         //decrypted text
-        System.out.println(en.decryption(cipher1).toString());
-        System.out.println(en.decryption(cipher2).toString());
+        System.out.println("\ndecipher text for cipher 1: "+en.decryption(cipher1).toString());
+        System.out.println("\ndecipher text for cipher 2: "+en.decryption(cipher2).toString());
 
         // D(E(m1)*E(m2) mod n^2) = (m1 + m2) mod n 
         BigInteger product_em1em2 = cipher1.multiply(cipher2).mod(en.nsq);
