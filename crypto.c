@@ -2,11 +2,11 @@
 #include<stdlib.h>
 #include <math.h>
 
-int p=17,q=19;
+long long int p=17,q=19;
 
-int gcd(int a,int b)
+long long int gcd(long long int a,long long int b)
 {
-    int result = (a<b)?a:b; // Finding minimum of a nd b
+    long long int result = (a<b)?a:b; // Finding minimum of a nd b
     while (result > 0) 
     {
         if (a % result == 0 && b % result == 0) {
@@ -17,20 +17,20 @@ int gcd(int a,int b)
     return result;
 }
 
-int lcm(int a, int b)
+long long int lcm(long long int a, long long int b)
 {
     return (a / gcd(a, b)) * b;
 }
-int invmod(int A, int M)
+long long int invmod(long long int A, long long int M)
 {
-    for (int X = 1; X < M; X++)
+    for (long long int X = 1; X < M; X++)
         if (((A % M) * (X % M)) % M == 1)
             return X;
 }
 
-int encrypt(int n, int g, int m)
+long long int encrypt(long long int n, long long int g, long long int m)
 {
-    int r,k1,k2,cipher,mess;
+    long long int r,k1,k2,cipher,mess;
     
 
     if (gcd(g,n*n)==1){
@@ -41,12 +41,12 @@ int encrypt(int n, int g, int m)
     }
 
     r=rand() % n;
-    printf(" r=%d ",r);
+    printf(" r=%lld ",r);
 
     
 
-    k1 = (int)pow(g, m)%(n*n);
-    k2 = (int)pow(r, n)%(n*n);
+    k1 = (long long int)pow(g, m)%(n*n);
+    k2 = (long long int)pow(r, n)%(n*n);
 
     cipher = (k1 * k2) % (n*n);
 
@@ -54,32 +54,32 @@ int encrypt(int n, int g, int m)
     return cipher;
 }
 
-int decrypt(int cipher, int gLambda, int gMu,int g)
+long long int decrypt(long long int cipher, long long int gLambda, long long int gMu,long long int g)
 {
-    int l,n;
+    long long int l,n;
     n=p*q;
-    //l = (int)((((int)pow(cipher, gLambda)%(n*n))-1)/n);
+    //l = (long long int)((((long long int)pow(cipher, gLambda)%(n*n))-1)/n);
     l = 175;
-    printf("n=%d \n",n);
-    printf("lambda=%d \n",gLambda);
-    printf("mu=%d \n",gMu);
-    printf("l=%d \n",l);
-    int decipher=(l * gMu) % n;
+    printf("n=%lld \n",n);
+    printf("lambda=%lld \n",gLambda);
+    printf("mu=%lld \n",gMu);
+    printf("l=%lld \n",l);
+    long long int decipher=(l * gMu) % n;
     return decipher;
 }
 
-int main()
+long long int main()
 {
-    int m=22,n,g=112,gMu,l1;
+    long long int m=22,n,g=112,gMu,l1;
     n = p*q;
-    int gLambda = lcm(p-1,q-1);
-    //l1 = (int)((((int)pow(g, gLambda)%(n*n))-1)/n);
+    long long int gLambda = lcm(p-1,q-1);
+    //l1 = (long long int)((((long long int)pow(g, gLambda)%(n*n))-1)/n);
     l1=52;
     gMu = invmod(l1,n);
-    int cipher=encrypt(n,g,m);
-    printf("cipher=%d\n",cipher);
-    int decipher=decrypt(cipher, gLambda, gMu,g);
-    printf("decipher=%d\n",decipher);
+    long long int cipher=encrypt(n,g,m);
+    printf("cipher=%lld\n",cipher);
+    long long int decipher=decrypt(cipher, gLambda, gMu,g);
+    printf("decipher=%lld\n",decipher);
     return 0;
     
 }
